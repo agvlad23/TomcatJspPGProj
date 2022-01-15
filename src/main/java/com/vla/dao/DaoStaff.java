@@ -113,4 +113,9 @@ public class DaoStaff implements StaffDao{
         DataSourceFactory.close(conn);
         return isInserted;
     }
+
+    public boolean addUserAndScore(Stuff stuff,Score score){
+
+        return true;
+    }
 }

@@ -53,6 +53,7 @@
     </tbody>
 </table>
 <p><a href="Score?action=new">Add Score</a></p>
+<p><a href="Stuff">Users</a></p>
 </body>
 </html>
 

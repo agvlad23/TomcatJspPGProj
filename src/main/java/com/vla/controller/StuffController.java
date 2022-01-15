@@ -43,6 +43,8 @@ public class StuffController extends HttpServlet {
                 case "update":
                     updateStaff(request, response);
                     break;
+                case "scores":
+                    showScores(request,response);
                 default:
                     listStuff(request, response);
                     break;
@@ -55,7 +57,7 @@ public class StuffController extends HttpServlet {
     }
 
     private void listStuff(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-    RequestDispatcher dispatcher=request.getRequestDispatcher("jsp/StuffList.jsp");
+        RequestDispatcher dispatcher=request.getRequestDispatcher("jsp/StuffList.jsp");
         List<Stuff> listStuff=stuffDao.findAll();
         request.setAttribute("listStuff",listStuff);
         dispatcher.forward(request,response);
@@ -100,7 +102,10 @@ public class StuffController extends HttpServlet {
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         RequestDispatcher dispatcher=request.getRequestDispatcher("jsp/StuffForm.jsp");
         dispatcher.forward(request,response);
-    }  
+    }
+    private void showScores(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        response.sendRedirect("Score");
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);

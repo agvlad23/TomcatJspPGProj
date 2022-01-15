@@ -50,6 +50,8 @@ public class ScoreController extends HttpServlet {
                 case "update":
                     updateScore(request, response);
                     break;
+                case "users":
+                    showUsers(request, response);
                 default:
                     listScore(request, response);
                     break;
@@ -125,6 +127,10 @@ public class ScoreController extends HttpServlet {
         RequestDispatcher dispatcher=request.getRequestDispatcher("jsp/ScoreForm.jsp");
         dispatcher.forward(request,response);
     }
+    private void showUsers(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        response.sendRedirect("Stuff");
+    }
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);

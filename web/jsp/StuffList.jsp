@@ -44,5 +44,6 @@
 </tbody>
 </table>
 <p><a href="Stuff?action=new">Add User</a></p>
+<p><a href="Score">Scores</a></p>
 </body>
 </html>
