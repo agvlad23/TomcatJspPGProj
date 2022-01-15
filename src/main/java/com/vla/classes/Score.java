@@ -8,6 +8,8 @@ public class Score {
     protected double score;
     protected Integer idUser;
     protected Integer idSubject;
+    protected String nameUser;
+    protected String nameSubject;
 
     public Score(Date date, double score, String nameUser, String nameSubject) {
         this.date = date;
@@ -16,8 +18,25 @@ public class Score {
         this.nameSubject = nameSubject;
     }
 
+    public Score(Integer id, Date date, double score, String nameUser, String nameSubject) {
+        this.id = id;
+        this.date = date;
+        this.score = score;
+        this.nameUser = nameUser;
+        this.nameSubject = nameSubject;
+    }
+
+    public Score(int id, Double score) {
+        this.id = id;
+        this.score = score;
+    }
+
     public String getNameUser() {
         return nameUser;
+    }
+
+    public Score(Integer id) {
+        this.id = id;
     }
 
     public void setNameUser(String nameUser) {
@@ -42,8 +61,12 @@ public class Score {
         this.idSubject = idSubject1;
     }
 
-    protected String nameUser;
-    protected String nameSubject;
+    public Score(Date date, double score, Integer idUser, Integer idSubject) {
+        this.date = date;
+        this.score = score;
+        this.idUser = idUser;
+        this.idSubject = idSubject;
+    }
 
     public Score(Integer id, Date date, double score, Integer idUser, Integer idSubject) {
         this.id = id;
