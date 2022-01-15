@@ -43,6 +43,6 @@
 
 </tbody>
 </table>
-<p><a href="Stuff?action=insert">Add User</a></p>
+<p><a href="Stuff?action=new">Add User</a></p>
 </body>
 </html>

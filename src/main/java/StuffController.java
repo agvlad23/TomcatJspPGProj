@@ -13,23 +13,15 @@ import java.util.logging.Logger;
 
 public class StuffController extends HttpServlet {
 
-    public static void main(String[] args) throws SQLException {
-        var k2=DaoStaff.getInstance();
-        var k=k2.findAll();
-
-
-        System.out.println(k);
-    }
 
     private static final Logger LOGGER = Logger.getLogger(StuffController.class.getName());
-    private DaoStaff stuffDao= DaoStaff.getInstance();
+    private final DaoStaff stuffDao= DaoStaff.getInstance();
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getServletPath();
-        String a2=request.getParameter("action");
-        LOGGER.log(Level.SEVERE, a2+"  "+action);
+        String action = request.getParameter("action");
+        LOGGER.log(Level.SEVERE, "  "+action);
        // action=a2;
-        if (a2!=null)
-            action=a2;
+        if (action==null)
+            action="list";
         try {
             switch (action) {
                 case "new":
@@ -73,7 +65,7 @@ public class StuffController extends HttpServlet {
 
         Stuff stuff=new Stuff(id,name,role);
         stuffDao.update(stuff);
-        response.sendRedirect("list");
+        response.sendRedirect("Stuff");
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)throws SQLException, ServletException, IOException  {
@@ -85,13 +77,26 @@ public class StuffController extends HttpServlet {
     }
 
     private void deleteStuff(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        int id=Integer.parseInt(request.getParameter("id"));
+
+        Stuff stuff=new Stuff(id);
+        stuffDao.delete(stuff);
+        response.sendRedirect("Stuff");
     }
 
     private void insertStuff(HttpServletRequest request, HttpServletResponse response)throws SQLException, ServletException, IOException  {
+        String name=request.getParameter("name");
+        RoleUser role=RoleUser.values()[Integer.parseInt(request.getParameter("role"))];
+
+        Stuff stuff=new Stuff(0,name,role);
+        stuffDao.save(stuff);
+        response.sendRedirect("Stuff");
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-    }
+        RequestDispatcher dispatcher=request.getRequestDispatcher("jsp/StuffForm.jsp");
+        dispatcher.forward(request,response);
+    }  
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);

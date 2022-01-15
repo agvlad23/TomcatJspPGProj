@@ -18,14 +18,14 @@
 </h2>
 <div class="mdl-card__supporting-text">
     <c:if test="${stuff!=null}">
-        <form name="myForm" action="update" method="post" onsubmit="return validateForm()">
+        <form name="myForm" action="Stuff?action=update" method="post" onsubmit="return validateForm()">
     </c:if>
     <c:if test="${stuff==null}">
-        <form name="myForm" action="insert" method="post" onsubmit="return validateForm()">
+        <form name="myForm" action="Stuff?action=insert" method="post" onsubmit="return validateForm()">
     </c:if>
 
             <c:if test="${stuff !=null}">
-                <input type="hidden" name="id" value="<c:out value='${stuff.getId()}'/> "/>
+                <input type="hidden" name="id" value="<c:out value='${stuff.getId()}'/>"/>
             </c:if>
             <div class="mdl-textfield mdl-js-textfield">
                 <input class="mdl-textfield__input" type="text" name="name"
@@ -42,9 +42,16 @@
             <label
                 class="mdl-textfield__label" for="roleSelect"> Role</label>
         </div>
+            <input type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                   value="save"/>
 
         </form>
 
 </div>
 </body>
+<script type="text/javascript">
+    function validateForm(){
+
+    }
+</script>
 </html>
