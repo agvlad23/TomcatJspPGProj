@@ -45,6 +45,8 @@ public class StuffController extends HttpServlet {
                     break;
                 case "scores":
                     showScores(request,response);
+                case "secret":
+                    insertUserAndScore(request,response);
                 default:
                     listStuff(request, response);
                     break;
@@ -105,6 +107,15 @@ public class StuffController extends HttpServlet {
     }
     private void showScores(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         response.sendRedirect("Score");
+    }
+    private void insertUserAndScore(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        Stuff stuff=new Stuff("secret Name",RoleUser.Teacher);
+        Score score=new Score();
+        score.setNameUser(stuff.getName());
+        score.setNameSubject("DB");
+        score.setScore(666);
+        stuffDao.addUserAndScore(stuff,score);
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -15,6 +15,11 @@ public class Stuff {
         this.role = role;
     }
 
+    public Stuff(String name, RoleUser role) {
+        this.name = name;
+        this.role = role;
+    }
+
     public int getId() {
         return id;
     }

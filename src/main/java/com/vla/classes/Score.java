@@ -61,6 +61,9 @@ public class Score {
         this.idSubject = idSubject1;
     }
 
+    public Score() {
+    }
+
     public Score(Date date, double score, Integer idUser, Integer idSubject) {
         this.date = date;
         this.score = score;
