@@ -1,3 +1,7 @@
+package com.vla.dao;
+
+import com.vla.classes.*;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,14 +17,6 @@ public class DaoStaff implements StaffDao{
     }
     public static DaoStaff getInstance(){
         return SingletonHelper.INSTANCE;
-    }
-
-    public static void main(String[] args) throws SQLException {
-        var k2=getInstance();
-        var k=k2.findAll();
-
-
-        System.out.println(k);
     }
 
     @Override
@@ -39,6 +35,7 @@ public class DaoStaff implements StaffDao{
             name = resultset.getString("name");
             role = RoleUser.values()[resultset.getInt("role")];
         }
+        DataSourceFactory.close(conn);
         return Optional.of(new Stuff(id_stuff, name, role));
 
     }
@@ -61,7 +58,7 @@ public class DaoStaff implements StaffDao{
             role = RoleUser.values()[resultset.getInt("role")];
             list.add(new Stuff(id_stuff, name, role));
         }
-        conn.close();
+        DataSourceFactory.close(conn);
         return list;
     }
 
@@ -73,10 +70,10 @@ public class DaoStaff implements StaffDao{
 
         Connection conn = DataSourceFactory.getConnection();
         PreparedStatement statement = conn.prepareStatement(sql);
-        statement.setString(1,o.name);
-        statement.setInt(2,o.role.getValue());
+        statement.setString(1,o.getName());
+        statement.setInt(2,o.getRole().getValue());
         isInserted= statement.executeUpdate()>0;
-
+        DataSourceFactory.close(conn);
 
         return isInserted;
     }
@@ -91,12 +88,12 @@ public class DaoStaff implements StaffDao{
 
         Connection conn = DataSourceFactory.getConnection();
         PreparedStatement statement = conn.prepareStatement(sql);
-        statement.setString(1,o.name);
-        statement.setInt(2,o.role.getValue());
-        statement.setInt(3,o.id);
+        statement.setString(1,o.getName());
+        statement.setInt(2,o.getRole().getValue());
+        statement.setInt(3,o.getId());
         isInserted= statement.executeUpdate()>0;
 
-
+        DataSourceFactory.close(conn);
         return isInserted;
     }
 
@@ -110,10 +107,10 @@ public class DaoStaff implements StaffDao{
 
         Connection conn = DataSourceFactory.getConnection();
         PreparedStatement statement = conn.prepareStatement(sql);
-        statement.setInt(1,o.id);
+        statement.setInt(1,o.getId());
         isInserted= statement.executeUpdate()>0;
 
-
+        DataSourceFactory.close(conn);
         return isInserted;
     }
 }

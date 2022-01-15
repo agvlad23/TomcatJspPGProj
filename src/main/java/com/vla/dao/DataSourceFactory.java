@@ -1,4 +1,4 @@
-
+package com.vla.dao;
 
 import org.postgresql.ds.PGSimpleDataSource;
 

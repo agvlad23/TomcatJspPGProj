@@ -6,7 +6,7 @@
         version="5.0">
     <servlet>
         <servlet-name>StuffController</servlet-name>
-        <servlet-class>StuffController</servlet-class>
+        <servlet-class>com.vla.controller.StuffController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>StuffController</servlet-name>

@@ -1,3 +1,7 @@
+package com.vla.controller;
+
+import com.vla.classes.*;
+import com.vla.dao.*;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -61,7 +65,7 @@ public class StuffController extends HttpServlet {
     private void updateStaff(HttpServletRequest request, HttpServletResponse response)throws SQLException, ServletException, IOException  {
         int id=Integer.parseInt(request.getParameter("id"));
         String name=request.getParameter("name");
-        RoleUser role=RoleUser.values()[Integer.parseInt(request.getParameter("role"))];
+        RoleUser role= RoleUser.values()[Integer.parseInt(request.getParameter("role"))];
 
         Stuff stuff=new Stuff(id,name,role);
         stuffDao.update(stuff);
@@ -86,7 +90,7 @@ public class StuffController extends HttpServlet {
 
     private void insertStuff(HttpServletRequest request, HttpServletResponse response)throws SQLException, ServletException, IOException  {
         String name=request.getParameter("name");
-        RoleUser role=RoleUser.values()[Integer.parseInt(request.getParameter("role"))];
+        RoleUser role= RoleUser.values()[Integer.parseInt(request.getParameter("role"))];
 
         Stuff stuff=new Stuff(0,name,role);
         stuffDao.save(stuff);

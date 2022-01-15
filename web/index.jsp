@@ -13,6 +13,6 @@
     <title>$Title$</title>
   </head>
   <body>
-
+  <jsp:forward page="/Stuff?action=listuser" />
   </body>
 </html>

@@ -1,3 +1,5 @@
+package com.vla.classes;
+
 public enum RoleUser {
     ERROR(0),
     Teacher(1),

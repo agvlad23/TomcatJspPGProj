@@ -1,3 +1,5 @@
+package com.vla.classes;
+
 public class Stuff {
     protected int id;
     protected String name;
