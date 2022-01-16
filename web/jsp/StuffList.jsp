@@ -23,6 +23,7 @@
         <th>ID</th>
         <th>User Name</th>
         <th>Role</th>
+        <th>Average Score</th>
         <th colspan=2>Action</th>
     </tr>
     </thead>
@@ -36,6 +37,7 @@
             <td><c:out value="${stuff.getId()}" /></td>
             <td><c:out value="${stuff.getName()}" /></td>
             <td><c:out value="${stuff.getRole()}" /></td>
+            <td><c:out value="${stuff.getAvgScore()}" /></td>
             <td><a href="Stuff?action=edit&id=<c:out value="${stuff.getId()}"/>">Update</a></td>
             <td><a href="Stuff?action=delete&id=<c:out value="${stuff.getId()}"/>">Delete</a></td>
         </tr>

@@ -4,6 +4,22 @@ public class Stuff {
     protected int id;
     protected String name;
     protected RoleUser role;
+    protected Double avgScore;
+
+    public Double getAvgScore() {
+        return avgScore;
+    }
+
+    public void setAvgScore(Double avgScore) {
+        this.avgScore = avgScore;
+    }
+
+    public Stuff(int id, String name, RoleUser role, Double avgScore) {
+        this.id = id;
+        this.name = name;
+        this.role = role;
+        this.avgScore = avgScore;
+    }
 
     public Stuff(int id) {
         this.id = id;

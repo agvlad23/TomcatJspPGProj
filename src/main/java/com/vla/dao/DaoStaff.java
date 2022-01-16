@@ -44,11 +44,14 @@ public class DaoStaff implements StaffDao {
 
     @Override
     public List<Stuff> findAll() throws SQLException {
-        String sql = "SELECT id,name,role FROM users";
+        String sql = "SELECT u.id,name,role,avg(score) FROM users u " +
+                "left join scores s on s.id_user=u.id " +
+                "group by u.id ";
         int id_stuff = 0;
         List<Stuff> list = new ArrayList<>();
         RoleUser role = RoleUser.ERROR;
         String name = "";
+        Double avgScore=0.0;
 
         Connection conn = DataSourceFactory.getConnection();
         Statement statement = conn.createStatement();
@@ -58,7 +61,8 @@ public class DaoStaff implements StaffDao {
             id_stuff = resultset.getInt("id");
             name = resultset.getString("name");
             role = RoleUser.values()[resultset.getInt("role")];
-            list.add(new Stuff(id_stuff, name, role));
+            avgScore=resultset.getDouble("avg");
+            list.add(new Stuff(id_stuff, name, role,avgScore));
         }
         DataSourceFactory.close(conn);
         return list;
