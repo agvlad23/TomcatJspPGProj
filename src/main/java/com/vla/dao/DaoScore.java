@@ -165,7 +165,8 @@ public class DaoScore implements ScoresDao{
         Connection conn = DataSourceFactory.getConnection();
         int idUser=0;
         int idSubject=0;
-
+        conn.setAutoCommit(false);
+        conn.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
         if(o.getIdUser()==null && o.getNameUser()!=null && !o.getNameUser().equals("")) {
 
             sql = "select id from users " +
@@ -205,8 +206,29 @@ public class DaoScore implements ScoresDao{
             counterQuestionMark=1;
         }
 
-        sql= "insert into scores("+date+"score,id_user,id_subject) values ("+dateQuestionMark+"?,?,?)";
+        sql= " select id from  user_subject " +
+                "where id_user=? and id_subject=?";
+
         PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setInt(1,idUser);
+        statement.setInt(2,idSubject);
+        ResultSet resultset = statement.executeQuery();
+
+        if(!resultset.next())
+        {
+            sql="insert into user_subject (id_user,id_subject) " +
+                    "values (?,?)";
+
+            statement = conn.prepareStatement(sql);
+            statement.setInt(1,idUser);
+            statement.setInt(2,idSubject);
+
+            statement.executeUpdate();
+        }
+
+
+        sql= "insert into scores("+date+"score,id_user,id_subject) values ("+dateQuestionMark+"?,?,?)";
+        statement = conn.prepareStatement(sql);
         if (o.getDate()!=null)
             statement.setDate(1, (java.sql.Date)o.getDate());
 
@@ -214,6 +236,8 @@ public class DaoScore implements ScoresDao{
         statement.setInt(2+counterQuestionMark,idUser);
         statement.setInt(3+counterQuestionMark,idSubject);
         isInserted= statement.executeUpdate()>0;
+
+        conn.commit();
         DataSourceFactory.close(conn);
 
         return isInserted;

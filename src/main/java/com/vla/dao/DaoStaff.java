@@ -2,10 +2,10 @@ package com.vla.dao;
 
 import com.vla.classes.*;
 
+import javax.lang.model.element.NestingKind;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.sql.Date;
+import java.util.*;
 
 public class DaoStaff implements StaffDao {
 
@@ -44,15 +44,18 @@ public class DaoStaff implements StaffDao {
 
     @Override
     public List<Stuff> findAll() throws SQLException {
-        String sql = "SELECT u.id,name,role,avg(score) FROM users u " +
+        String sql = "SELECT u.id,u.name,sub.name,avg(score),u.role FROM users u " +
                 "left join scores s on s.id_user=u.id " +
-                "group by u.id ";
+                "left join user_subject us on us.id_user = s.id_user and us.id_subject =s.id_subject " +
+                "left join subjects sub on sub.id=us.id_subject " +
+                "group by u.id,sub.name ";
+
         int id_stuff = 0;
-        List<Stuff> list = new ArrayList<>();
+        Map<Integer,Stuff> list = new HashMap<>();
         RoleUser role = RoleUser.ERROR;
         String name = "";
         Double avgScore=0.0;
-
+        String subjectName="";
         Connection conn = DataSourceFactory.getConnection();
         Statement statement = conn.createStatement();
         ResultSet resultset = statement.executeQuery(sql);
@@ -62,10 +65,15 @@ public class DaoStaff implements StaffDao {
             name = resultset.getString("name");
             role = RoleUser.values()[resultset.getInt("role")];
             avgScore=resultset.getDouble("avg");
-            list.add(new Stuff(id_stuff, name, role,avgScore));
+            subjectName=resultset.getString(3);
+            Double finalAvgScore = avgScore;
+            String finalSubjectName = subjectName;
+            list.computeIfPresent(id_stuff,(k, v)-> v.addToSubjects(finalSubjectName,finalAvgScore));
+            list.putIfAbsent(id_stuff,new Stuff(id_stuff, name, role,avgScore,subjectName) );
+            //new Stuff(id_stuff, name, role,avgScore));
         }
         DataSourceFactory.close(conn);
-        return list;
+        return new ArrayList<>(list.values());
     }
 
     @Override
