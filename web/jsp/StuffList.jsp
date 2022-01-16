@@ -23,7 +23,7 @@
         <th>ID</th>
         <th>User Name</th>
         <th>Role</th>
-        <th>Average Scores</th>
+        <th>Average Score</th>
         <th colspan=2>Action</th>
     </tr>
     </thead>
