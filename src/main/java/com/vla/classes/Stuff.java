@@ -1,10 +1,30 @@
 package com.vla.classes;
 
+import java.util.*;
+
 public class Stuff {
     protected int id;
     protected String name;
     protected RoleUser role;
     protected Double avgScore;
+    protected Map<String,Double> subjects=new HashMap<>();
+    
+
+
+    public Stuff addToSubjects(String sub,Double val){
+        subjects.put(sub,val);
+
+        return this;
+    }
+    public Map<String, Double> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Map<String, Double> subjects) {
+        this.subjects = subjects;
+    }
+
+
 
     public Double getAvgScore() {
         return avgScore;
@@ -19,6 +39,14 @@ public class Stuff {
         this.name = name;
         this.role = role;
         this.avgScore = avgScore;
+    }
+
+    public Stuff(int id, String name, RoleUser role, Double avgScore,String subjectName) {
+        this.id = id;
+        this.name = name;
+        this.role = role;
+        this.avgScore = avgScore;
+        subjects.putIfAbsent(subjectName,avgScore);
     }
 
     public Stuff(int id) {
