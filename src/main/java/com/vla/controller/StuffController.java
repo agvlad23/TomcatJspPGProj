@@ -111,8 +111,8 @@ public class StuffController extends HttpServlet {
     private void insertUserAndScore(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         Stuff stuff=new Stuff("secret Name",RoleUser.Teacher);
         Score score=new Score();
-        score.setNameUser(stuff.getName());
-        score.setNameSubject("DB");
+        //score.setNameUser(stuff.getName());
+        //score.setNameSubject("DB");
         score.setScore(666);
         stuffDao.addUserAndScore(stuff,score);
 

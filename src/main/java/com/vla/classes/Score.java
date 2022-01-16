@@ -1,29 +1,44 @@
 package com.vla.classes;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
+@Getter
+@EqualsAndHashCode(of ={"date","score","nameUser","nameSubject"})
+@ToString(of={"date","score","nameUser","nameSubject"})
+@NoArgsConstructor
+@Entity
 public class Score {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
-    protected Date date;
+    @Column(nullable = false)
+    protected LocalDateTime date;
+    @Column(nullable = false)
     protected double score;
-    protected Integer idUser;
-    protected Integer idSubject;
-    protected String nameUser;
-    protected String nameSubject;
+
+    @ManyToOne
+    protected Stuff nameUser;
+    @ManyToOne
+    protected Subject nameSubject;
 
     public Score(Date date, double score, String nameUser, String nameSubject) {
-        this.date = date;
+
         this.score = score;
-        this.nameUser = nameUser;
-        this.nameSubject = nameSubject;
+
     }
 
     public Score(Integer id, Date date, double score, String nameUser, String nameSubject) {
         this.id = id;
-        this.date = date;
+
         this.score = score;
-        this.nameUser = nameUser;
-        this.nameSubject = nameSubject;
+
     }
 
     public Score(int id, Double score) {
@@ -31,59 +46,38 @@ public class Score {
         this.score = score;
     }
 
-    public String getNameUser() {
-        return nameUser;
-    }
+
 
     public Score(Integer id) {
         this.id = id;
     }
 
-    public void setNameUser(String nameUser) {
-        this.nameUser = nameUser;
-    }
 
-    public String getNameSubject() {
-        return nameSubject;
-    }
 
-    public void setNameSubject(String nameSubject) {
-        this.nameSubject = nameSubject;
-    }
 
     public Score(Date date, double score, Integer idUser, Integer idSubject, String nameUser, String nameSubject, Integer idSubject1) {
-        this.date = date;
+
         this.score = score;
-        this.idUser = idUser;
-        this.idSubject = idSubject;
-        this.nameUser = nameUser;
-        this.nameSubject = nameSubject;
-        this.idSubject = idSubject1;
+
     }
 
-    public Score() {
-    }
 
     public Score(Date date, double score, Integer idUser, Integer idSubject) {
-        this.date = date;
+
         this.score = score;
-        this.idUser = idUser;
-        this.idSubject = idSubject;
+
     }
 
     public Score(Integer id, Date date, double score, Integer idUser, Integer idSubject) {
         this.id = id;
-        this.date = date;
+
         this.score = score;
-        this.idUser = idUser;
-        this.idSubject = idSubject;
+
     }
 
     public Score(Integer id, double score, Integer idUser, Integer idSubject) {
         this.id = id;
         this.score = score;
-        this.idUser = idUser;
-        this.idSubject = idSubject;
     }
 
     public Integer getId() {
@@ -95,11 +89,11 @@ public class Score {
     }
 
     public Date getDate() {
-        return date;
+       return null;
     }
 
     public void setDate(Date date) {
-        this.date = date;
+
     }
 
     public double getScore() {
@@ -111,19 +105,19 @@ public class Score {
     }
 
     public Integer getIdUser() {
-        return idUser;
+        return null;
     }
 
     public void setIdUser(Integer idUser) {
-        this.idUser = idUser;
+
     }
 
     public Integer getIdSubject() {
-        return idSubject;
+        return null;
     }
 
     public void setIdSubject(Integer idSubject) {
-        this.idSubject = idSubject;
+
     }
 
 }

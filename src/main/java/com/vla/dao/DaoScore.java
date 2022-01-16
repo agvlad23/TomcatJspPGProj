@@ -173,7 +173,7 @@ public class DaoScore implements ScoresDao{
                     "where name=? " +
                     "limit 1";
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1,o.getNameUser());
+           // statement.setString(1,o.getNameUser());
             ResultSet resultset = statement.executeQuery();
 
             if (resultset.next())
@@ -188,7 +188,7 @@ public class DaoScore implements ScoresDao{
                     "where name=? " +
                     "limit 1";
             PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1,o.getNameSubject());
+           // statement.setString(1,o.getNameSubject());
             ResultSet resultset = statement.executeQuery();
 
             if (resultset.next())

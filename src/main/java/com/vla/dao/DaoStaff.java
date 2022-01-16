@@ -155,7 +155,7 @@ public class DaoStaff implements StaffDao {
                         "where name=? " +
                         "limit 1";
                 statement = conn.prepareStatement(sql);
-                statement.setString(1, score.getNameUser());
+                //statement.setString(1, score.getNameUser());
                 ResultSet resultset = statement.executeQuery();
 
                 if (resultset.next())
@@ -170,7 +170,7 @@ public class DaoStaff implements StaffDao {
                         "where name=? " +
                         "limit 1";
                 statement = conn.prepareStatement(sql);
-                statement.setString(1, score.getNameSubject());
+                //statement.setString(1, score.getNameSubject());
                 ResultSet resultset = statement.executeQuery();
 
                 if (resultset.next())

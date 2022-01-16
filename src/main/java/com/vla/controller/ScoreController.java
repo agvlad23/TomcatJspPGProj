@@ -117,8 +117,8 @@ public class ScoreController extends HttpServlet {
 
 
         Score score=new Score(date,valueScore,idUser,idSubject);
-        score.setNameUser(request.getParameter("nameUser"));
-        score.setNameSubject(request.getParameter("nameSubject"));
+       // score.setNameUser(request.getParameter("nameUser"));
+       // score.setNameSubject(request.getParameter("nameSubject"));
         scoreDao.save(score);
         response.sendRedirect("Score");
     }

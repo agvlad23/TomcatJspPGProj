@@ -1,52 +1,62 @@
 package com.vla.classes;
 
+import lombok.*;
+
+import javax.persistence.*;
 import java.util.*;
 
+@Getter
+@EqualsAndHashCode(of ={"name","role"})
+@ToString(of={"name","role"})
+@NoArgsConstructor
+@Entity
+@Table(name ="users")
 public class Stuff {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;
+
+    @Column (length = 50,nullable = false)
     protected String name;
-    protected RoleUser role;
-    protected Double avgScore;
-    protected Map<String,Double> subjects=new HashMap<>();
-    
+
+    @Column(length = 2,nullable = false)
+    @Setter
+    protected RoleUser role= RoleUser.ERROR;
+
+    @Column(nullable = false)
+    @OneToMany
+    protected List<Score> avgScore=new ArrayList<>();
+
+    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY )
+    @JoinTable(name = "user_subject",joinColumns = {@JoinColumn(name = "id_user")},
+            inverseJoinColumns = {@JoinColumn(name = "id_subject")})
+    protected List<Subject> subjects=new ArrayList<>();
 
 
     public Stuff addToSubjects(String sub,Double val){
-        subjects.put(sub,val);
+
 
         return this;
     }
-    public Map<String, Double> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(Map<String, Double> subjects) {
-        this.subjects = subjects;
-    }
 
 
 
-    public Double getAvgScore() {
-        return avgScore;
-    }
 
-    public void setAvgScore(Double avgScore) {
-        this.avgScore = avgScore;
-    }
+
 
     public Stuff(int id, String name, RoleUser role, Double avgScore) {
         this.id = id;
         this.name = name;
         this.role = role;
-        this.avgScore = avgScore;
+        //this.avgScore = avgScore;
     }
 
     public Stuff(int id, String name, RoleUser role, Double avgScore,String subjectName) {
         this.id = id;
         this.name = name;
         this.role = role;
-        this.avgScore = avgScore;
-        subjects.putIfAbsent(subjectName,avgScore);
+      //  this.avgScore = avgScore;
+        //subjects.putIfAbsent(subjectName,avgScore);
     }
 
     public Stuff(int id) {
