@@ -13,6 +13,7 @@
     <title>$Title$</title>
   </head>
   <body>
-  <jsp:forward page="/Stuff?action=listuser" />
+  <a href="${pageContext.request.contextPath}/Stuff">List Developers</a>
+
   </body>
 </html>

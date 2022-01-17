@@ -10,7 +10,11 @@
         <property name="hibernate.connection.password">123456</property>
         <property name="show_sql">true</property>
         <property name="dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="current_session_context_class">thread</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <mapping class="com.vla.classes.Stuff"/>
+        <mapping class="com.vla.classes.Subject"/>
+        <mapping class="com.vla.classes.Score"/>
 
     </session-factory>
 </hibernate-configuration>

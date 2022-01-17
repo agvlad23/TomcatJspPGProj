@@ -2,25 +2,27 @@ package com.vla.controller;
 
 import com.vla.classes.*;
 import com.vla.dao.*;
+
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@WebServlet("/score")
 public class ScoreController extends HttpServlet {
 
 
@@ -64,8 +66,8 @@ public class ScoreController extends HttpServlet {
     }
 
     private void listScore(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-        RequestDispatcher dispatcher=request.getRequestDispatcher("jsp/ScoreList.jsp");
-        List<Score> listScore= scoreDao.findAll();
+        RequestDispatcher dispatcher=request.getRequestDispatcher("src/main/webapp/jsp/ScoreList.jsp");
+        List<Score> listScore= null;//scoreDao.findAll();
         request.setAttribute("listScore",listScore);
         dispatcher.forward(request,response);
 
@@ -84,7 +86,7 @@ public class ScoreController extends HttpServlet {
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)throws SQLException, ServletException, IOException  {
         Integer id=Integer.parseInt(request.getParameter("id"));
         Optional<Score> existingStuff= scoreDao.find(id);
-        RequestDispatcher dispatcher=request.getRequestDispatcher("jsp/ScoreForm.jsp");
+        RequestDispatcher dispatcher=request.getRequestDispatcher("src/main/webapp/jsp/ScoreForm.jsp");
         existingStuff.ifPresent((s)->request.setAttribute("score",s));
         dispatcher.forward(request,response);
     }
@@ -124,7 +126,7 @@ public class ScoreController extends HttpServlet {
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-        RequestDispatcher dispatcher=request.getRequestDispatcher("jsp/ScoreForm.jsp");
+        RequestDispatcher dispatcher=request.getRequestDispatcher("src/main/webapp/jsp/ScoreForm.jsp");
         dispatcher.forward(request,response);
     }
     private void showUsers(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {

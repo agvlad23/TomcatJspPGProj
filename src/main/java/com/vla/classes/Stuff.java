@@ -13,6 +13,7 @@ import java.util.*;
 @Table(name ="users")
 public class Stuff {
     @Id
+    @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;
 
@@ -27,7 +28,7 @@ public class Stuff {
     @OneToMany
     protected List<Score> avgScore=new ArrayList<>();
 
-    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.LAZY )
+    @ManyToMany(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER )
     @JoinTable(name = "user_subject",joinColumns = {@JoinColumn(name = "id_user")},
             inverseJoinColumns = {@JoinColumn(name = "id_subject")})
     protected List<Subject> subjects=new ArrayList<>();

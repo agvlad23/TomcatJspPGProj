@@ -19,12 +19,7 @@ public class DaoScore implements ScoresDao{
         return DaoScore.SingletonHelper.INSTANCE;
     }
 
-    public static void main(String[] args) throws SQLException {
-        var k1=new DaoScore();
-        var k=k1.find(2);
-        System.out.println(k);
 
-    }
 
     @Override
     public Optional<Score> find(Integer id) throws SQLException {

@@ -13,6 +13,7 @@
 </head>
 <body>
 <h2 class="mdl-card__title-text">
+    <jsp:useBean id="stuff" scope="request" type="com.vla.classes.Stuff"/>
     <c:if test="${stuff!=null}">Edit Stuff</c:if>
     <c:if test="${stuff==null}">Add New Stuff</c:if>
 </h2>

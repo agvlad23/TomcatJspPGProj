@@ -14,6 +14,7 @@ import java.util.Date;
 @ToString(of={"date","score","nameUser","nameSubject"})
 @NoArgsConstructor
 @Entity
+@Table(name = "scores")
 public class Score {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
